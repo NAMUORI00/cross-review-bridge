@@ -15,7 +15,9 @@ Use the skill when the user asks for:
 Default behavior:
 
 1. Build a compact local context brief with `skills/cross-review-bridge/scripts/New-CrossReviewBrief.ps1` when useful.
-2. Ask before sending any project content to ChatGPT web or another external reviewer.
-3. Use the Codex in-app browser only after the user has logged in manually.
-4. Prefer `Pro • 확장` in ChatGPT web when visible and appropriate.
-5. Treat external feedback as advisory, then verify locally before applying changes.
+2. Use ChatGPT web through the Codex Desktop in-app browser by default.
+3. Do not use OpenAI API or SDK calls unless the user explicitly asks for API mode.
+4. Ask before sending any project content to ChatGPT web or another external reviewer.
+5. Use the Codex in-app browser only after the user has logged in manually.
+6. Prefer `Pro • 확장` in ChatGPT web when visible and appropriate.
+7. Treat external feedback as advisory, then verify locally before applying changes.

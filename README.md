@@ -1,16 +1,32 @@
 # Cross Review Bridge
 
-`cross-review-bridge` is a Codex skill for running a human-approved cross-review loop between a local Codex Desktop workspace and an external AI review surface such as ChatGPT web, ChatGPT Projects, Deep Research, Codex web, or another browser-accessible reviewer.
+`cross-review-bridge` is a Codex skill for running a browser-first, human-approved cross-review loop between a local Codex Desktop workspace and ChatGPT web in the Codex Desktop in-app browser.
 
-It keeps Codex Desktop as the source of truth and executor. External feedback is treated as advisory, then verified locally before code changes are applied.
+It keeps Codex Desktop as the source of truth and executor. ChatGPT web feedback is treated as advisory, then verified locally before code changes are applied.
 
 ## What It Does
 
 - Builds compact review briefs from local project context.
 - Supports review, analysis, debugging, and research handoffs.
 - Redacts common secret patterns before generating the brief.
-- Uses a human approval gate before sending project content to an external web app.
+- Uses the Codex Desktop in-app browser to work through ChatGPT web by default.
+- Uses a human approval gate before sending project content to ChatGPT web.
 - Helps Codex classify external feedback as `apply`, `consider`, `reject`, or `needs user decision`.
+
+## Browser-First, No API By Default
+
+This plugin is intentionally not an OpenAI API wrapper. For normal use it should not call the OpenAI API, Responses API, Chat Completions API, SDK scripts, or any API-backed reviewer.
+
+Default flow:
+
+1. Codex Desktop builds a local brief.
+2. Codex Desktop opens or reuses ChatGPT web in the in-app browser.
+3. The user logs in manually if needed.
+4. Codex selects the visible ChatGPT mode, such as `Pro • 확장`, only after observing the web UI.
+5. Codex asks before submitting project content.
+6. Codex reads the visible web response and verifies it locally.
+
+API mode is only allowed when the user explicitly asks for API mode.
 
 ## Install In Codex Desktop
 
@@ -51,7 +67,7 @@ Restart Codex after installing a new skill.
 Example prompts:
 
 ```text
-Use $cross-review-bridge to cross-check this project through ChatGPT web.
+Use $cross-review-bridge to cross-check this project through ChatGPT web in the Codex Desktop browser.
 ```
 
 ```text
@@ -96,6 +112,7 @@ This skill is intentionally semi-automatic:
 - Project content is summarized before transmission.
 - External web app submission requires explicit approval.
 - External feedback is checked against local files and tests before implementation.
+- API-based review is disabled unless the user explicitly requests API mode.
 
 Do not use this skill for bulk automated extraction from ChatGPT or for sending secrets, credentials, customer data, or unrelated private files.
 

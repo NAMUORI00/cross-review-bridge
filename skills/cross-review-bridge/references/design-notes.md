@@ -8,3 +8,4 @@ Use an official-style Codex plugin package for distribution, while keeping the s
 - The Codex in-app browser docs say it is intended for local/public pages and that signed-in sites are brittle; keep user login and data transmission approval human-gated.
 - ChatGPT Projects are useful as the external review workspace because they keep chats, project instructions, files, and connected app context together.
 - ChatGPT Pro usage should not become bulk automated extraction; keep this a human-approved review loop.
+- Do not use OpenAI API calls for the normal cross-review path. This plugin is browser-first so Codex Desktop visibly enters ChatGPT web, selects the visible mode, submits after approval, and reads the web response.

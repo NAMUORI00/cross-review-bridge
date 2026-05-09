@@ -1,6 +1,6 @@
 ---
 name: cross-review-bridge
-description: Use when Codex should run a human-approved cross-review loop between the local project and an external AI review surface such as ChatGPT web, ChatGPT Projects, Deep Research, Codex web, or another browser-accessible reviewer. Trigger for requests like "프로 리뷰", "프로 분석", "크로스 검증", "외부 피드백 받아와", "웹앱에 추가 질문해서 검증해", "ChatGPT Pro로 검토해", or "받은 피드백 반영". Use for project feedback, architecture review, debugging, research, UX critique, and verification handoff. Do not use for fully automatic bulk extraction from ChatGPT or for sending secrets without explicit user approval.
+description: Use when Codex should run a browser-first, human-approved cross-review loop between the local project and ChatGPT web in the Codex Desktop in-app browser, ChatGPT Projects, Deep Research, Codex web, or another browser-accessible reviewer. Trigger for requests like "프로 리뷰", "프로 분석", "크로스 검증", "외부 피드백 받아와", "웹앱에 추가 질문해서 검증해", "ChatGPT Pro로 검토해", or "받은 피드백 반영". Use for project feedback, architecture review, debugging, research, UX critique, and verification handoff. Do not use the OpenAI API or any API-backed review path unless the user explicitly asks for API mode. Do not use for fully automatic bulk extraction from ChatGPT or for sending secrets without explicit user approval.
 ---
 
 # Cross Review Bridge
@@ -10,6 +10,12 @@ description: Use when Codex should run a human-approved cross-review loop betwee
 Keep Codex Desktop as the source of truth and executor. Treat the external reviewer as an advisory second opinion. Never apply external feedback directly without checking it against the local codebase, tests, and user intent.
 
 Before sending project content to a web app, summarize exactly what will be sent and ask the user to approve the transmission. Do not send secrets, tokens, private credentials, customer data, or large unrelated files.
+
+## Browser-First Policy
+
+Default to the ChatGPT web app through the Codex Desktop in-app browser. Do not use the OpenAI API, Responses API, Chat Completions API, SDK scripts, or model-calling automation for the external review step unless the user explicitly says to use API mode.
+
+For normal requests such as `프로 리뷰`, `크로스 검증`, `ChatGPT Pro로 검토해`, or `웹앱에 추가 질문해서 검증해`, prepare the brief locally, open or reuse ChatGPT web in the in-app browser, set the visible model/mode there when needed, paste the brief, ask for approval, submit in the web UI, then read the visible web response.
 
 ## Workflow
 
@@ -33,9 +39,10 @@ Before sending project content to a web app, summarize exactly what will be sent
    - Ask the external reviewer to mark uncertainty and avoid broad rewrites.
 
 4. Prepare the external channel:
-   - Prefer the existing ChatGPT Project when the user has one open.
+   - Prefer the existing ChatGPT Project in the Codex Desktop in-app browser when the user has one open.
    - For ChatGPT web, set the strongest appropriate mode available, such as Pro extended, only after observing the UI.
    - Use the in-app browser only when the user has logged in and the page is reachable. If authentication breaks, ask the user to complete login manually.
+   - Do not substitute an API call for the browser handoff unless the user explicitly requests API mode.
 
 5. Get approval:
    - Show a short "Send summary" naming the destination and content categories.
@@ -59,7 +66,7 @@ Before sending project content to a web app, summarize exactly what will be sent
 
 ## Browser Notes
 
-The in-app browser is officially intended for local/public pages, and authenticated web apps can be brittle. This project has verified that the current ChatGPT Project session can be used after user login, including selecting `Pro • extended`, submitting a question, and reading the response. Treat that as a convenience path, not a guarantee.
+The default external channel is ChatGPT web in the Codex Desktop in-app browser. The in-app browser is officially intended for local/public pages, and authenticated web apps can be brittle. This project has verified that the current ChatGPT Project session can be used after user login, including selecting `Pro • extended`, submitting a question, and reading the response. Treat that as the preferred path for this skill, with manual login and explicit send approval.
 
 If the page becomes `about:blank`, loses session state, or OAuth stalls:
 
