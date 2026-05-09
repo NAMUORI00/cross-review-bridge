@@ -12,15 +12,27 @@ It keeps Codex Desktop as the source of truth and executor. External feedback is
 - Uses a human approval gate before sending project content to an external web app.
 - Helps Codex classify external feedback as `apply`, `consider`, `reject`, or `needs user decision`.
 
-## Install
+## Install In Codex Desktop
 
-After this repo is published, install the skill with Codex's skill installer from:
+This repository is packaged as an official-style Codex plugin with a `.codex-plugin/plugin.json` manifest and a bundled `skills/` directory.
 
-```text
-https://github.com/NAMUORI00/cross-review-bridge/tree/main/skills/cross-review-bridge
+Add the marketplace once:
+
+```powershell
+codex plugin marketplace add NAMUORI00/cross-review-bridge --ref main
 ```
 
-In Codex, you can ask:
+Then restart Codex Desktop, open the Plugins directory, choose `NAMUORI00 Codex Plugins`, and install `Cross Review Bridge`.
+
+You can also install from the repo URL if your Codex surface supports Git-backed plugin marketplaces:
+
+```text
+https://github.com/NAMUORI00/cross-review-bridge
+```
+
+## Install As A Standalone Skill
+
+If you only want the skill folder instead of the plugin package, install it with Codex's skill installer:
 
 ```text
 Use $skill-installer to install https://github.com/NAMUORI00/cross-review-bridge/tree/main/skills/cross-review-bridge
@@ -90,6 +102,10 @@ Do not use this skill for bulk automated extraction from ChatGPT or for sending 
 ## Repository Layout
 
 ```text
+.codex-plugin/
+  plugin.json
+.agents/plugins/
+  marketplace.json
 skills/cross-review-bridge/
   SKILL.md
   agents/openai.yaml
@@ -100,4 +116,3 @@ skills/cross-review-bridge/
 ## License
 
 MIT
-

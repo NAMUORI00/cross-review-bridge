@@ -1,0 +1,22 @@
+{
+  "name": "namuori00-codex-plugins",
+  "interface": {
+    "displayName": "NAMUORI00 Codex Plugins"
+  },
+  "plugins": [
+    {
+      "name": "cross-review-bridge",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/NAMUORI00/cross-review-bridge.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
+

@@ -15,6 +15,8 @@ jobs:
         shell: pwsh
         run: |
           $required = @(
+            ".codex-plugin/plugin.json",
+            ".agents/plugins/marketplace.json",
             "skills/cross-review-bridge/SKILL.md",
             "skills/cross-review-bridge/agents/openai.yaml",
             "skills/cross-review-bridge/scripts/New-CrossReviewBrief.ps1",
@@ -26,6 +28,19 @@ jobs:
             }
           }
 
+      - name: Validate plugin JSON files
+        shell: pwsh
+        run: |
+          $plugin = Get-Content -LiteralPath ".codex-plugin/plugin.json" -Raw | ConvertFrom-Json
+          if ($plugin.name -ne "cross-review-bridge") { throw "Unexpected plugin name" }
+          if ($plugin.skills -ne "./skills/") { throw "Unexpected skills path" }
+          if (-not $plugin.interface.displayName) { throw "Missing plugin display name" }
+
+          $marketplace = Get-Content -LiteralPath ".agents/plugins/marketplace.json" -Raw | ConvertFrom-Json
+          if ($marketplace.plugins[0].name -ne "cross-review-bridge") { throw "Marketplace entry missing plugin" }
+          if (-not $marketplace.plugins[0].policy.installation) { throw "Marketplace policy missing installation" }
+          if (-not $marketplace.plugins[0].policy.authentication) { throw "Marketplace policy missing authentication" }
+
       - name: Run brief generation smoke test
         shell: pwsh
         run: |
@@ -33,4 +48,3 @@ jobs:
             -ProjectPath . `
             -Mode Review `
             -Goal "CI smoke test"
-

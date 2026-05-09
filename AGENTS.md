@@ -1,6 +1,8 @@
 # Project Agent Notes
 
-This repository packages the `$cross-review-bridge` Codex skill. Use the skill when the user asks for:
+This repository packages the `$cross-review-bridge` Codex skill as a Codex plugin. Keep `.codex-plugin/plugin.json`, `.agents/plugins/marketplace.json`, and `skills/cross-review-bridge/SKILL.md` aligned.
+
+Use the skill when the user asks for:
 
 - `프로 리뷰`
 - `프로 분석`
