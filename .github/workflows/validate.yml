@@ -1,0 +1,36 @@
+name: Validate
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  smoke-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify required skill files
+        shell: pwsh
+        run: |
+          $required = @(
+            "skills/cross-review-bridge/SKILL.md",
+            "skills/cross-review-bridge/agents/openai.yaml",
+            "skills/cross-review-bridge/scripts/New-CrossReviewBrief.ps1",
+            "skills/cross-review-bridge/references/prompt-templates.md"
+          )
+          foreach ($path in $required) {
+            if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+              throw "Missing required file: $path"
+            }
+          }
+
+      - name: Run brief generation smoke test
+        shell: pwsh
+        run: |
+          ./skills/cross-review-bridge/scripts/New-CrossReviewBrief.ps1 `
+            -ProjectPath . `
+            -Mode Review `
+            -Goal "CI smoke test"
+

@@ -1,0 +1,9 @@
+.codex-cross-review/
+.agents/
+gpt-feedback-loop/
+review-brief.md
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+

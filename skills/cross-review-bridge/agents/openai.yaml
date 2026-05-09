@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cross Review Bridge"
+  short_description: "Cross-check project work through an approved external reviewer."
+  default_prompt: "Use $cross-review-bridge to cross-check this project through an external review channel."
