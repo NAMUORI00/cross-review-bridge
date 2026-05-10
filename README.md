@@ -4,6 +4,17 @@
 
 It keeps Codex Desktop as the source of truth and executor. ChatGPT web feedback is treated as advisory, then verified locally before code changes are applied.
 
+## Positioning
+
+This is not a generic ChatGPT GUI handoff skill. It is a Codex Desktop in-app browser cross-review bridge.
+
+If you already use a local `chatgpt-gui-handoff` style workflow, treat that as a sibling pattern:
+
+- `chatgpt-gui-handoff`: hands prompts to ChatGPT through a dedicated Chrome profile or ChatGPT desktop app.
+- `cross-review-bridge`: uses the Codex Desktop in-app browser / browser-use path so Codex can stay inside the desktop app, select visible ChatGPT web modes, submit after approval, and read the visible response.
+
+The long-term shape can support transport adapters such as `in-app-browser`, `chrome-profile`, `chatgpt-desktop`, `manual-copy`, and explicit `api` mode. Today this plugin defaults to `in-app-browser` and disables API-backed review unless the user explicitly requests API mode.
+
 ## What It Does
 
 - Builds compact review briefs from local project context.

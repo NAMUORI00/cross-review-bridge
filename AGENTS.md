@@ -2,6 +2,8 @@
 
 This repository packages the `$cross-review-bridge` Codex skill as a Codex plugin. Keep `.codex-plugin/plugin.json`, `.agents/plugins/marketplace.json`, and `skills/cross-review-bridge/SKILL.md` aligned.
 
+This is the Codex Desktop in-app browser variant, not a generic Chrome-profile or ChatGPT desktop GUI handoff. Do not switch to a `chatgpt-gui-handoff` style transport unless the user explicitly asks for that.
+
 Use the skill when the user asks for:
 
 - `프로 리뷰`

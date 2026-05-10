@@ -1,4 +1,4 @@
 interface:
   display_name: "Cross Review Bridge"
-  short_description: "Cross-check work through ChatGPT web in Codex Desktop."
+  short_description: "Cross-check through ChatGPT web in Codex's in-app browser."
   default_prompt: "Use $cross-review-bridge to cross-check this project through ChatGPT web in the Codex Desktop browser."

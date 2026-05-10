@@ -1,7 +1,7 @@
 {
   "name": "cross-review-bridge",
-  "version": "0.1.2",
-  "description": "Browser-first cross-review workflows between Codex Desktop and ChatGPT web.",
+  "version": "0.1.3",
+  "description": "Codex Desktop in-app browser cross-review workflows for ChatGPT web.",
   "author": {
     "name": "NAMUORI00",
     "email": "46620366+NAMUORI00@users.noreply.github.com",
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Cross Review Bridge",
     "shortDescription": "Cross-check work through ChatGPT web in Codex Desktop.",
-    "longDescription": "Prepare compact local project briefs, route them through ChatGPT web in the Codex Desktop in-app browser with user approval, then synthesize and verify feedback back in Codex Desktop. API-backed review is disabled unless explicitly requested.",
+    "longDescription": "Prepare compact local project briefs, route them through ChatGPT web in the Codex Desktop in-app browser with user approval, then synthesize and verify feedback back in Codex Desktop. This is the in-app browser variant, not a generic Chrome-profile or ChatGPT desktop GUI handoff. API-backed review is disabled unless explicitly requested.",
     "developerName": "NAMUORI00",
     "category": "Productivity",
     "capabilities": [

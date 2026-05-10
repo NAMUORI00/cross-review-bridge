@@ -17,6 +17,17 @@ Default to the ChatGPT web app through the Codex Desktop in-app browser. Do not 
 
 For normal requests such as `프로 리뷰`, `크로스 검증`, `ChatGPT Pro로 검토해`, or `웹앱에 추가 질문해서 검증해`, prepare the brief locally, open or reuse ChatGPT web in the in-app browser, set the visible model/mode there when needed, paste the brief, ask for approval, submit in the web UI, then read the visible web response.
 
+## Relationship To GUI Handoff Skills
+
+Do not treat this skill as a generic ChatGPT GUI handoff workflow. It is specifically the Codex Desktop in-app browser variant.
+
+If another local skill such as `chatgpt-gui-handoff` exists, use it only as a conceptual sibling for Chrome-profile or ChatGPT-desktop-app workflows. For this skill, keep the transport as `in-app-browser` by default:
+
+- Use Codex Desktop Browser / browser-use to access ChatGPT web.
+- Do not launch a separate Chrome profile or ChatGPT desktop app unless the user explicitly asks to switch transport.
+- Do not use API mode unless the user explicitly asks for API mode.
+- If future transport adapters are added, keep `in-app-browser` as the default adapter.
+
 ## Workflow
 
 1. Classify the request:
@@ -43,6 +54,7 @@ For normal requests such as `프로 리뷰`, `크로스 검증`, `ChatGPT Pro로
    - For ChatGPT web, set the strongest appropriate mode available, such as Pro extended, only after observing the UI.
    - Use the in-app browser only when the user has logged in and the page is reachable. If authentication breaks, ask the user to complete login manually.
    - Do not substitute an API call for the browser handoff unless the user explicitly requests API mode.
+   - Do not substitute a dedicated Chrome profile or ChatGPT desktop app handoff unless the user explicitly asks for that transport.
 
 5. Get approval:
    - Show a short "Send summary" naming the destination and content categories.
