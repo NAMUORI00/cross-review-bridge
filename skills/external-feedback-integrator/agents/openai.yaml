@@ -1,0 +1,4 @@
+interface:
+  display_name: "External Feedback Integrator"
+  short_description: "Validate, classify, and selectively apply external review feedback."
+  default_prompt: "Use $external-feedback-integrator to classify this Pro review feedback before applying changes."

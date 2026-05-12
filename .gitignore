@@ -1,4 +1,6 @@
 .codex-cross-review/
+.codex-pro-review-packages/
+.codex-external-feedback/
 .agents/skills/
 gpt-feedback-loop/
 review-brief.md

@@ -1,7 +1,7 @@
 {
   "name": "namuori00-codex-plugins",
   "interface": {
-    "displayName": "NAMUORI00 Codex Plugins"
+    "displayName": "NAMUORI00 Pro Review Plugins"
   },
   "plugins": [
     {

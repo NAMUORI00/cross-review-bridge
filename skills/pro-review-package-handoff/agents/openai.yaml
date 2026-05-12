@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pro Review Package Handoff"
+  short_description: "Build a ZIP that ChatGPT Pro can review from context alone."
+  default_prompt: "Use $pro-review-package-handoff to package the current work into a ChatGPT Pro review ZIP."
