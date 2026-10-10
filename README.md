@@ -4,18 +4,11 @@ This repository packages Codex skills for human-approved Pro review workflows be
 
 It keeps Codex Desktop as the source of truth and executor. ChatGPT web feedback is treated as advisory, then verified locally before code, document, or artifact changes are applied.
 
-## Positioning
+## Why
 
-This is not a generic ChatGPT GUI handoff package. It is a Codex Desktop in-app browser and Pro-review workflow plugin.
+Coding agents work fast inside a local workspace, but a second opinion from a stronger reviewer catches design and correctness issues they miss. Sending project content to an external service, however, needs a human decision and a local check of whatever comes back. This plugin turns that into a repeatable, approval-gated loop.
 
-If you already use a local `chatgpt-gui-handoff` style workflow, treat that as a sibling pattern:
-
-- `chatgpt-gui-handoff`: hands prompts to ChatGPT through a dedicated Chrome profile or ChatGPT desktop app.
-- `cross-review-bridge`: uses the Codex Desktop in-app browser / browser-use path so Codex can stay inside the desktop app, select visible ChatGPT web modes, submit after approval, and read the visible response.
-- `pro-review-package-handoff`: builds a self-contained ZIP that ChatGPT Pro can review from context alone, including code changes, documents, PDFs, HTML, figures, logs, screenshots, and Codex work summaries.
-- `external-feedback-integrator`: classifies ChatGPT Pro or other external feedback as `apply`, `consider`, `reject`, or `needs user decision`, then applies only verified recommendations.
-
-The long-term shape can support transport adapters such as `in-app-browser`, `chrome-profile`, `chatgpt-desktop`, `manual-copy`, and explicit `api` mode. Today this plugin defaults to `in-app-browser`; the skill workflow should not use API-backed review unless the user explicitly requests API mode.
+![Cross Review Bridge flow](docs/assets/cross-review-flow.svg)
 
 ## What It Does
 
@@ -27,21 +20,18 @@ The long-term shape can support transport adapters such as `in-app-browser`, `ch
 - Uses a human approval gate before sending project content to ChatGPT web.
 - Helps Codex classify external feedback as `apply`, `consider`, `reject`, or `needs user decision`.
 
-## Browser-First, No API By Default
+## Review Flow
 
-This plugin is intentionally not an OpenAI API wrapper. For normal use it should not call the OpenAI API, Responses API, Chat Completions API, SDK scripts, or any API-backed reviewer.
-
-Default flow:
+The default transport is the Codex Desktop in-app browser, so every submission stays visible and approval-gated.
 
 1. Codex Desktop builds a local brief.
 2. For richer handoffs, Codex Desktop builds a self-contained ZIP with `000_READ_ME_FIRST.txt`, `000_REVIEW_PROMPT.md`, and `000_MANIFEST.md`.
 3. Codex Desktop opens or reuses ChatGPT web in the in-app browser.
 4. The user logs in manually if needed.
-5. Codex selects the visible ChatGPT mode, such as `Pro • 확장`, only after observing the web UI.
+5. Codex selects the model mode shown in the web UI only after observing it.
 6. Codex asks before submitting project content or uploading a ZIP.
 7. Codex reads the visible web response and verifies it locally.
 
-API mode is outside the default workflow and should only be used when the user explicitly asks for API mode.
 
 ## Install In Codex Desktop
 
@@ -85,26 +75,10 @@ Example prompts:
 
 ```text
 Use $cross-review-bridge to cross-check this project through ChatGPT web in the Codex Desktop browser.
-```
-
-```text
 프로 리뷰
-```
-
-```text
 크로스 검증
-```
-
-```text
 외부 피드백 반영
-```
-
-```text
 Pro 리뷰용 ZIP 만들어줘
-```
-
-```text
-ZIP만 올려도 Pro가 알아서 읽도록 구성해줘
 ```
 
 The skill will prepare a brief, identify the destination, summarize what will be sent, and ask for approval before submitting anything to an external reviewer.
